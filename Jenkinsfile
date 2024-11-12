@@ -9,7 +9,7 @@ metadata:
   name: 'build-pod-${BUILD_NUMBER}'
 spec:
   serviceAccountName: kubectl
-    - name: kubectl
+- name: kubectl
     image: lachlanevenson/k8s-kubectl:latest
     tty: true
     command:
