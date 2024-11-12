@@ -10,13 +10,6 @@ pipeline {
     }
 
     stages {
-        stage('kubectl create') {
-            steps {
-                  kubernetes { 
-                      yamlFile 'kubepod.yaml'
-                  }
-              }
-        }
         stage('Git Clone') {
             steps {
                 echo 'Git Clone'
@@ -31,6 +24,13 @@ pipeline {
                     echo 'Fail git clone step'
                 }
             }
+        }
+          stage('kubectl create') {
+            steps {
+                  kubernetes { 
+                      yamlFile 'kubepod.yaml'
+                  }
+              }
         }
         stage('gradle Build') {
             steps {
