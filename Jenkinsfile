@@ -94,10 +94,9 @@ spec:
         }
        stage('Deploy') {
             steps {
+                echo 'kubernets deploy'
                 container('kubectl'){
-                sh """
-                
-                """
+                    sh "kubectl apply -f deploy-web.yaml"
                 }
             }
         }
