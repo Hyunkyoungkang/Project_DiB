@@ -27,7 +27,6 @@ spec:
     environment { 
         // jenkins에 등록해 놓은 docker hub credentials 이름
         DOCKERHUB_CREDENTIALS = credentials('dockerCredentials')
-        KUBECONFIG = '/home/jenkins/.kube/config'
     }
 
     stages {
