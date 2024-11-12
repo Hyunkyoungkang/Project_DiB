@@ -95,7 +95,9 @@ spec:
        stage('Deploy') {
             steps {
                 container('kubectl'){
-                sh 'kubectl apply -f deploy-web.yaml'
+                sh """
+                    cp ./deploy-web.yaml ./
+                    'kubectl apply -f deploy-web.yaml'
                 }
             }
         }
