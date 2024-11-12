@@ -98,6 +98,7 @@ spec:
                 sh """
                     cp ./deploy-web.yaml ./
                     'kubectl apply -f deploy-web.yaml'
+                """
                 }
             }
         }
