@@ -7,6 +7,7 @@ kind: Pod
 metadata:
   name: "build-app-${BUILD_NUMBER}"
 spec:
+  containers:
   - name: kubectl
     image: lachlanevenson/k8s-kubectl:latest
     tty: true
