@@ -17,7 +17,7 @@ spec:
       - "infinity"
 """
     }
-    
+}
     tools {
         jdk 'jdk17'
         gradle 'G3'
