@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        kubernetes {
-      yamlFile 'kubepod.yaml'
-      }
-    }
+    agent any
     tools {
         jdk 'jdk17'
         gradle 'G3'
@@ -16,22 +12,9 @@ pipeline {
     stages {
         stage('kubectl create') {
             steps {
-        kubernetes { 
-            yaml"""
-apiVersion: v1
-kind: Pod
-metadata:
-  name: "build-app-${BUILD_NUMBER}"
-spec:
-  containers:
-  - name: kubectl
-    image: lachlanevenson/k8s-kubectl:latest
-    tty: true
-    command:
-      - "sleep"
-      - "infinity"
-"""
-        }
+                  kubernetes { 
+                      yamlFile 'kubepod.yaml'
+                  }
               }
         }
         stage('Git Clone') {
