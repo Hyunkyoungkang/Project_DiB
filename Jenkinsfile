@@ -1,22 +1,21 @@
 pipeline {
     agent {
-        kubernetes { 
-            yaml"""
+                kubernetes {
+                    label 'my-pod'
+                    yaml """
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "build-app-${BUILD_NUMBER}"
-  namespace: default
+  name: 'build-pod-${BUILD_NUMBER}'
 spec:
-  containers:
-  - name: kubectl
+  serviceAccountName: kubectl
+    - name: kubectl
     image: lachlanevenson/k8s-kubectl:latest
     tty: true
     command:
       - "sleep"
       - "infinity"
 """
-        }
     }
     
     tools {
