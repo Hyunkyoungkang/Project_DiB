@@ -6,6 +6,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: "build-app-${BUILD_NUMBER}"
+  namespace: default
 spec:
   containers:
   - name: kubectl
