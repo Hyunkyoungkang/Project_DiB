@@ -1,5 +1,23 @@
 pipeline {
-    agent any
+    agent {
+        kubernetes { 
+            yaml"""
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "build-app-${BUILD_NUMBER}"
+spec:
+  serviceAccountName: kubectl
+  containers:
+  - name: kubectl
+    image: lachlanevenson/k8s-kubectl:latest
+    tty: true
+    command:
+      - "sleep"
+      - "infinity"
+"""
+        }
+    }
     
     tools {
         jdk 'jdk17'
@@ -77,7 +95,9 @@ pipeline {
         }
        stage('Deploy') {
             steps {
+                container('kubectl'){
                 sh 'kubectl apply -f deploy-web.yaml'
+                }
             }
         }
     }
