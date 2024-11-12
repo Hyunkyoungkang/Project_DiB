@@ -27,6 +27,7 @@ pipeline {
         }
           stage('kubectl create') {
             steps {
+                  echo 'pod create'
                   kubernetes { 
                       yamlFile 'kubectlpod.yaml'
                   }
