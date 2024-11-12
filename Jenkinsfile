@@ -1,5 +1,17 @@
 pipeline {
-    agent {
+    agent any
+    tools {
+        jdk 'jdk17'
+        gradle 'G3'
+    }
+    environment { 
+        // jenkins에 등록해 놓은 docker hub credentials 이름
+        DOCKERHUB_CREDENTIALS = credentials('dockerCredentials')
+    }
+
+    stages {
+        stage('kubectl create') {
+            steps {
         kubernetes { 
             yaml"""
 apiVersion: v1
@@ -16,18 +28,8 @@ spec:
       - "infinity"
 """
         }
-}
-    tools {
-        jdk 'jdk17'
-        gradle 'G3'
-    }
-
-    environment { 
-        // jenkins에 등록해 놓은 docker hub credentials 이름
-        DOCKERHUB_CREDENTIALS = credentials('dockerCredentials')
-    }
-
-    stages {
+              }
+        }
         stage('Git Clone') {
             steps {
                 echo 'Git Clone'
