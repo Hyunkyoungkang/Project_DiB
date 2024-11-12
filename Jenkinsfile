@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        kubernetes {
+      yamlFile 'kubepod.yaml'
+      }
+    }
     tools {
         jdk 'jdk17'
         gradle 'G3'
