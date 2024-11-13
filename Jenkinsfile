@@ -1,7 +1,5 @@
-pipeline {
-    agent {
-        kubernetes { 
-            yaml"""
+
+def KUBECTL_POD = """
 apiVersion: v1
 kind: Pod
 metadata:
@@ -15,8 +13,10 @@ spec:
       - "sleep"
       - "infinity"
 """
-        }
-    }
+
+
+pipeline {
+    agent any
     tools {
         jdk 'jdk17'
         gradle 'G3'
@@ -91,6 +91,7 @@ spec:
         }
        stage('Deploy') {
             steps {
+                agent { kubernetes label: 'kubectl', yaml: "${KUBECTL_POD}" }
                 echo 'kubernets deploy'
                 container('kubectl'){
                     sh "kubectl apply -f deploy-web.yaml"
