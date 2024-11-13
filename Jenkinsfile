@@ -91,12 +91,16 @@ pipeline {
         }
        stage('Deploy') {
             agent { kubernetes label: 'kubectl', yaml: "${KUBECTL_POD}" }
-            steps {
-                echo 'kubernets deploy'
-                container('kubectl'){
+            stages{
+              stage('Deploy Image to Staging') {
+                steps {
+                  echo 'kubernets deploy'
+                  container('kubectl'){
                     sh "kubectl apply -f deploy-web.yaml"
                 }
+              }
             }
+          }
         }
     }
 }
