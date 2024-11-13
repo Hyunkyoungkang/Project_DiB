@@ -3,6 +3,7 @@ def KUBECTL_POD = """
 apiVersion: v1
 kind: Pod
 metadata:
+  serviceAccountName: default
   name: "build-app-${BUILD_NUMBER}"
 spec:
   containers:
