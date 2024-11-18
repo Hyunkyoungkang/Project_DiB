@@ -17,7 +17,7 @@ spec:
         - image: hyunkyoungkang/busan-tour-kube:latest
           name: web-container
           ports:
-            - containerPort: 9000
+            - containerPort: 8080
 --- # 서비스
 apiVersion: v1
 kind: Service
@@ -29,7 +29,7 @@ spec:
   type: NodePort
   ports:
   - protocol: TCP
-    port: 9000
-    targetPort: 9000
+    port: 80
+    targetPort: 8080
     nodePort: 30080
 
